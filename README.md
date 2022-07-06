@@ -26,7 +26,7 @@ Any Linux distributions with Xvfb installed so you have 80% change not to listen
   </details>
   
 1. Install any dependencies. You can install it by typing `npm i` in terminal
-2. Run the player. To run it use `xvfb-run node player <insert song name here>`. Note if you get command not found error install Xvfb in your Linux distro or edit player.js to set headless: false to headless:true.
+2. Run the player. To run it use `xvfb-run node player <insert song name here>`. Make sure to have quote (') at song name if it have space like 'dream rainbow liella'. Note if you get command not found error install Xvfb in your Linux distro or edit player.js to set headless: false to headless:true.
 3. The music will played shortly. To stop press Ctrl+C
 
 ### Um, why there's ublock inside?

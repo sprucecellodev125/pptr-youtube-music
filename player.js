@@ -1,13 +1,13 @@
 const puppeteer = require('puppeteer');
-const url = process.argv[2];
+const songname = process.argv[2];
 
-if (!url) {
+if (!songname) {
 	throw "Please gimme song name aight";
 }
 
 (async () => {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         userDataDir: './data2',
         args: ["--autoplay-policy=no-user-gesture-required"],
         ignoreDefaultArgs: ['--mute-audio'],
@@ -18,13 +18,13 @@ if (!url) {
         width: 1280,
         height: 720
     });
-    await page.goto('https://google.com');
-    await page.click('input[class="gLFyf gsfi"]');
-    await page.focus('input[class="gLFyf gsfi"]');
-    await page.type('input.gLFyf.gsfi', url);
+    await page.goto('https://youtube.com');
+    await page.click('div#search-input.ytd-searchbox-spt');
+    await page.focus('div#search-input.ytd-searchbox-spt');
+    await page.type('div#search-input.ytd-searchbox-spt', songname);
     await page.keyboard.press('Enter'); 
-    await page.waitForTimeout('5000');
-    await page.click('div.twQ0Be');
+    await page.waitForTimeout('2000');
+    await page.click('a#video-title.yt-simple-endpoint.style-scope.ytd-video-renderer');
     await page.waitForTimeout(99999999);
     await browser.close();
 })();
