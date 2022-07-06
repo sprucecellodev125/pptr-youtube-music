@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "puppeteer": "^14.4.0",
+    "puppeteer-screen-recorder": "^2.0.2"
+  }
+}
