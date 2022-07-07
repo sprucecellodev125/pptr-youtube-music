@@ -1,17 +1,18 @@
 const puppeteer = require('puppeteer');
 const songname = process.argv[2];
 
+
 if (!songname) {
 	throw "Please gimme song name aight";
 }
 
 (async () => {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         userDataDir: './data2',
-        args: ["--autoplay-policy=no-user-gesture-required"],
         ignoreDefaultArgs: ['--mute-audio'],
         ignoreDefaultArgs: ['--disable-extensions'],
+        args: ["--autoplay-policy=no-user-gesture-required"]
     });
     const page = await browser.newPage();
     await page.setViewport({
