@@ -6,7 +6,9 @@ if (!songname) {
 	throw "Please gimme song name aight";
 }
 
+console.log('Starting puppeteer');
 (async () => {
+    console.log('Starting puppeteer')
     const browser = await puppeteer.launch({
         headless: true,
         ignoreDefaultArgs: ['--mute-audio'],
@@ -17,6 +19,7 @@ if (!songname) {
         width: 1280,
         height: 720
     });
+    console.log('Scraping YouTube');
     await page.goto('https://youtube.com');
     await page.click('div#search-input.ytd-searchbox-spt');
     await page.focus('div#search-input.ytd-searchbox-spt');
@@ -24,6 +27,7 @@ if (!songname) {
     await page.keyboard.press('Enter'); 
     await page.waitForTimeout('2000');
     await page.click('a#video-title.yt-simple-endpoint.style-scope.ytd-video-renderer');
+    console.log('Playing music');
     await page.waitForTimeout(99999999);
     await browser.close();
 })();
