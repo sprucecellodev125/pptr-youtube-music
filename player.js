@@ -8,10 +8,8 @@ if (!songname) {
 
 (async () => {
     const browser = await puppeteer.launch({
-        headless: false,
-        userDataDir: './data2',
+        headless: true,
         ignoreDefaultArgs: ['--mute-audio'],
-        ignoreDefaultArgs: ['--disable-extensions'],
         args: ["--autoplay-policy=no-user-gesture-required"]
     });
     const page = await browser.newPage();
