@@ -23,4 +23,4 @@ I assume you have Node.JS and npm installed so you can install the dependencies 
 3. The music will played shortly. To stop press Ctrl+C
 
 ### Um, why I heard ads
-well, because this is headless browser where you'll get same YouTube experience but without opening browser and search it manually
+~~well, because this is headless browser where you'll get same YouTube experience but without opening browser and search it manually~~ Now puppeteer-extra with Ad-blocker plugin is added. Just pull latest commit and you're good to go

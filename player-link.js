@@ -15,7 +15,6 @@ puppeteer.use(
   })
 )
 
-console.log('Starting puppeteer');
 (async () => {
     console.log('Starting puppeteer')
     const browser = await puppeteer.launch({
