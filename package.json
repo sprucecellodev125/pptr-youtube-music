@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "puppeteer": "^14.4.0",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-adblocker": "^2.13.4",
     "puppeteer-screen-recorder": "^2.0.2"
   }
 }

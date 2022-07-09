@@ -1,9 +1,19 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+
 const url = process.argv[2];
 
 if (!url) {
 	throw "Please gimme YouTube URL aight";
 }
+
+const { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } = require('puppeteer')
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
+puppeteer.use(
+  AdblockerPlugin({
+    // Optionally enable Cooperative Mode for several request interceptors
+    interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY
+  })
+)
 
 console.log('Starting puppeteer');
 (async () => {
@@ -22,31 +32,6 @@ console.log('Starting puppeteer');
     await page.goto(url);
     await page.waitForTimeout('2000');
     console.log('Playing music');
-    await page.evaluate(() => {         
-        self.moHandler = {
-            changesObserver: function (mutation) {                
-                if (mutation.type === 'attributes'){
-                    if(mutation.target.className == 'ytp-ad-skip-button ytp-button' || mutation.target.className == 'style-scope ytd-button-renderer style-text size-default'){                      
-                        mutation.target.click(); 
-                    }
-                }                  
-            },
-            subscriber: function (mutations) {              
-                mutations.forEach((mutation) => {
-                    self.moHandler.changesObserver(mutation);
-                });                             
-            },
-            init: function () {            
-                const target = self.document.documentElement;
-                const config = {
-                    attributes: true                    
-                };
-                self.mObserver = new MutationObserver(self.moHandler.subscriber);
-                self.mObserver.observe(target, config);
-            }
-        }
-        self.moHandler.init(); 
-    });
     await page.waitForTimeout(99999999);
     await browser.close();
 })();

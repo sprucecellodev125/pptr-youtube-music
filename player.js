@@ -1,10 +1,19 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 const songname = process.argv[2];
 
 
 if (!songname) {
 	throw "Please gimme song name aight";
 }
+
+const { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } = require('puppeteer')
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
+puppeteer.use(
+  AdblockerPlugin({
+    // Optionally enable Cooperative Mode for several request interceptors
+    interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY
+  })
+)
 
 console.log('Starting puppeteer');
 (async () => {
@@ -27,31 +36,6 @@ console.log('Starting puppeteer');
     await page.keyboard.press('Enter'); 
     await page.waitForTimeout('2000');
     await page.click('a#video-title.yt-simple-endpoint.style-scope.ytd-video-renderer');
-    await page.evaluate(() => {         
-        self.moHandler = {
-            changesObserver: function (mutation) {                
-                if (mutation.type === 'attributes'){
-                    if(mutation.target.className == 'ytp-ad-skip-button ytp-button' || mutation.target.className == 'style-scope ytd-button-renderer style-text size-default'){                      
-                        mutation.target.click(); 
-                    }
-                }                  
-            },
-            subscriber: function (mutations) {              
-                mutations.forEach((mutation) => {
-                    self.moHandler.changesObserver(mutation);
-                });                             
-            },
-            init: function () {            
-                const target = self.document.documentElement;
-                const config = {
-                    attributes: true                    
-                };
-                self.mObserver = new MutationObserver(self.moHandler.subscriber);
-                self.mObserver.observe(target, config);
-            }
-        }
-        self.moHandler.init(); 
-    });
     console.log('Playing music');
     await page.waitForTimeout(99999999);
     await browser.close();
