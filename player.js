@@ -8,12 +8,7 @@ if (!songname) {
 
 const { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } = require('puppeteer')
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
-puppeteer.use(
-  AdblockerPlugin({
-    // Optionally enable Cooperative Mode for several request interceptors
-    interceptResolutionPriority: DEFAULT_INTERCEPT_RESOLUTION_PRIORITY
-  })
-)
+puppeteer.use(AdblockerPlugin());
 
 (async () => {
     console.log('Starting puppeteer')
