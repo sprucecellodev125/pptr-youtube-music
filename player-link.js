@@ -12,7 +12,7 @@ puppeteer.use(AdblockerPlugin());
 (async () => {
     console.log('Starting puppeteer')
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         ignoreDefaultArgs: ['--mute-audio'],
         args: ["--autoplay-policy=no-user-gesture-required"]
     });
