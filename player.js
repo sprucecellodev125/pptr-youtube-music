@@ -1,10 +1,6 @@
 const puppeteer = require('puppeteer-extra');
-const songname = process.argv[2];
-
-
-if (!songname) {
-	throw "Please gimme song name aight";
-}
+const prompt = require("prompt-sync")({ sigint: true });
+const input = prompt("Input your song name: ");
 
 const { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } = require('puppeteer')
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
@@ -26,7 +22,7 @@ puppeteer.use(AdblockerPlugin());
     await page.goto('https://youtube.com');
     await page.click('div#search-input.ytd-searchbox-spt');
     await page.focus('div#search-input.ytd-searchbox-spt');
-    await page.type('div#search-input.ytd-searchbox-spt', songname);
+    await page.type('div#search-input.ytd-searchbox-spt', input);
     await page.keyboard.press('Enter'); 
     await page.waitForTimeout('2000');
     await page.click('a#video-title.yt-simple-endpoint.style-scope.ytd-video-renderer');
